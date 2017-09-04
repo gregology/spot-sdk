@@ -6,15 +6,29 @@ from datetime import datetime
 class SpotSDKError(Exception):
     pass
 
-class SpotMessage(object):
+class Message(object):
   def __init__(self, raw_message):
     if not isinstance(raw_message, dict):
       raise SpotSDKError('message should be dictionary')
-    self.__dict__.update(raw_message)
-    self.raw_message = raw_message
-    self.fields      = raw_message.keys()
 
-class SpotFeed(object):
+    self.type =          raw_message['messageType']
+    self.battery_state = raw_message['batteryState']
+    self.latitude =      raw_message['latitude']
+    self.longitude =     raw_message['longitude']
+    self.datetime =      datetime.utcfromtimestamp(raw_message['unixTime'])
+    self.content =       self.__content(raw_message)
+    self.raw =           raw_message
+
+  NO_MESSAGE_CONTENT = 'No message content'
+
+  def __content(self, raw_message):
+    if 'messageContent' in raw_message:
+      return raw_message['messageContent']
+    else:
+      return self.NO_MESSAGE_CONTENT
+
+
+class Feed(object):
 
   BASE_URL = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/'
 
@@ -22,13 +36,21 @@ class SpotFeed(object):
     if not isinstance(key, str):
       raise SpotSDKError('key should be string')
     self.key = key
-    self.collect_messages()
+    self.collect()
 
   def __request_url(self):
     return self.BASE_URL + self.key + '/message.json'
 
-  def collect_messages(self):
-    self.messages     = []
+  def first(self):
+      return self.messages[0]
+
+  def last(self):
+      return self.messages[-1]
+
+  def count(self):
+      return len(self.messages)
+
+  def collect(self):
     self.collected_at = datetime.now()
 
     url          = self.__request_url()
@@ -38,9 +60,10 @@ class SpotFeed(object):
     if 'errors' in response.keys():
       raise SpotSDKError(response['errors']['error']['text'])
 
-    self.__dict__.update(response['feedMessageResponse']['feed'])
-    self.__create_spot_messages(response['feedMessageResponse']['messages']['message'])
+    raw_messages = response['feedMessageResponse']['messages']['message']
+    self.__create_messages(raw_messages)
 
-  def __create_spot_messages(self, raw_messages):
+  def __create_messages(self, raw_messages):
+    self.messages = []
     for raw_message in raw_messages:
-        self.messages.append(SpotMessage(raw_message))
+        self.messages.append(Message(raw_message))
