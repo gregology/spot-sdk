@@ -10,7 +10,21 @@ Simple SDK for extracting messages from Spot's API
 Installation
 ------------
 
-Directly from ``spot-sdk``'s `git repo <https://github.com/gregology/spot-sdk>`
+``spot-sdk`` is available on PyPI
+
+http://pypi.python.org/pypi/spot-sdk
+
+Install via ``pip``
+::
+
+    $ pip install spot-sdk
+
+Or via ``easy_install``
+::
+
+    $ easy_install spot-sdk
+
+Or directly from ``spot-sdk``'s `git repo <https://github.com/gregology/spot-sdk>`
 ::
 
     $ git clone git://github.com/gregology/spot-sdk.git
