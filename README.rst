@@ -47,15 +47,18 @@ Basic usage
     >>> from spot_sdk import Feed
     >>> api_key = 'abcdefghijklmnopqrstuvwxy01234567'
     >>> feed = Feed(api_key)
+    >>> feed.collect()
     >>> feed.count()
     6
+    >>> foo.messages
+    [<spot_sdk.Message object at 0x10fd7f630>, <spot_sdk.Message object at 0x10fd7f6a0>...
     >>> feed.first().type
     'UNLIMITED-TRACK'
-    >>> feed.first().battery_state
+    >>> feed.last().battery_state
     'GOOD'
-    >>> feed.last().latitude
+    >>> feed.messages[0].latitude
     42.000
-    >>> feed.last().latitude
+    >>> feed.last().datetime
     datetime(2017, 1, 1, 0, 42, 0)
 
 

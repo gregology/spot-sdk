@@ -33,8 +33,8 @@ class Feed(object):
   def __init__(self, key):
     if not isinstance(key, str):
       raise SpotSDKError('key should be string')
-    self.key = key
-    self.collect()
+    self.key      = key
+    self.messages = []
 
   BASE_URL = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/'
 
@@ -64,6 +64,5 @@ class Feed(object):
     self.__create_messages(raw_messages)
 
   def __create_messages(self, raw_messages):
-    self.messages = []
     for raw_message in raw_messages:
         self.messages.append(Message(raw_message))
