@@ -2,6 +2,15 @@
 Spot SDK
 ========
 
+.. image:: https://badge.fury.io/py/spot-sdk.svg
+    :target: https://badge.fury.io/py/spot-sdk
+
+.. image:: http://img.shields.io/badge/license-MIT-yellow.svg?style=flat
+    :target: https://github.com/gregology/spot-sdk/blob/master/LICENSE
+
+.. image:: https://img.shields.io/badge/contact-Gregology-blue.svg?style=flat
+    :target: http://gregology.net/contact/
+
 Overview
 --------
 

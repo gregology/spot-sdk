@@ -11,6 +11,7 @@ class Message(object):
     if not isinstance(raw_message, dict):
       raise SpotSDKError('message should be dictionary')
 
+    self.id =            raw_message['id']
     self.type =          raw_message['messageType']
     self.battery_state = raw_message['batteryState']
     self.latitude =      raw_message['latitude']
@@ -29,14 +30,13 @@ class Message(object):
 
 
 class Feed(object):
-
-  BASE_URL = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/'
-
   def __init__(self, key):
     if not isinstance(key, str):
       raise SpotSDKError('key should be string')
     self.key = key
     self.collect()
+
+  BASE_URL = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/'
 
   def __request_url(self):
     return self.BASE_URL + self.key + '/message.json'
