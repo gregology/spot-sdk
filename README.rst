@@ -49,13 +49,13 @@ Basic usage
     >>> feed = Feed(api_key)
     >>> feed.count()
     6
-    >>> feed.first.type
+    >>> feed.first().type
     'UNLIMITED-TRACK'
-    >>> feed.first.battery_state
+    >>> feed.first().battery_state
     'GOOD'
-    >>> feed.last.latitude
+    >>> feed.last().latitude
     42.000
-    >>> feed.last.latitude
+    >>> feed.last().latitude
     datetime(2017, 1, 1, 0, 42, 0)
 
 
