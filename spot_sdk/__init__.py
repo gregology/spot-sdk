@@ -6,6 +6,7 @@ from datetime import datetime
 class SpotSDKError(Exception):
     pass
 
+
 class Message(object):
   def __init__(self, raw_message):
     if not isinstance(raw_message, dict):
@@ -54,7 +55,7 @@ class Feed(object):
     self.collected_at = datetime.now()
 
     url          = self.__request_url()
-    raw_response = urllib.request.urlopen(url).read()
+    raw_response = urllib.request.urlopen(url).read().decode('utf8')
     response     = json.loads(raw_response)['response']
 
     if 'errors' in response.keys():

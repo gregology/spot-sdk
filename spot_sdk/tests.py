@@ -51,6 +51,7 @@ class TestFeed(unittest.TestCase):
   @patch('urllib.request.urlopen', mock_success_urlopen)
   def test_creating_feed(self):
     feed = Feed('ValidApiKey')
+    feed.collect()
     self.assertTrue(feed.count() == 2)
     self.assertTrue(feed.first().id == 823675096)
     self.assertTrue(feed.last().id == 823674967)
@@ -61,7 +62,7 @@ class TestFeed(unittest.TestCase):
   @patch('urllib.request.urlopen', mock_error_urlopen)
   def test_incorrect_api_key(self):
     with self.assertRaises(SpotSDKError):
-      Feed('InvalidApiKey')
+      Feed('InvalidApiKey').collect()
 
 if __name__ == '__main__':
     unittest.main()
