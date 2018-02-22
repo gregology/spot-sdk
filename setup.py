@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
   name='spot-sdk',
-  version='2018.2.22.0',
+  version='2018.2.22.1',
   description='SDK for the find me spot',
   long_description=open('README.rst').read(),
   url='https://github.com/gregology/spot-sdk',
