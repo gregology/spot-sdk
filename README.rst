@@ -66,7 +66,7 @@ Running Test
 ------------
 ::
 
-    $ python spot-sdk/tests.py
+    $ python spot_sdk/tests.py
 
 Python compatibility
 --------------------

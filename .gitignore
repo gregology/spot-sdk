@@ -102,3 +102,6 @@ ENV/
 
 # scratch
 *scratch*
+
+# OSx
+*.DS_Store
